@@ -731,7 +731,7 @@ public class EditorFrame extends JFrame implements VetoableChangeListener,
 			                "editorFrame.importing"));
 			progressDialog.setVisible(true);
 
-			OPSProImporter worker = new OPSProImporter(root);
+			OPSProImporter worker = new OPSProImporter(root, JOptionPane.showInputDialog( this, "Password for OPSPro database" ));
 			progressDialog.setWorker(worker);
 			worker.addWorkerListener(new WorkerListener<MutableCatalog>()
 			{

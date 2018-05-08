@@ -149,7 +149,7 @@ public class BookIO {
     private static Document createBookDocument() throws SAXException {
         SchemaFactory schemaFactory = SchemaFactory
                 .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        Schema schema = schemaFactory.newSchema(NBVParser.class.getResource("book-1.0.xsd"));
+        Schema schema = schemaFactory.newSchema(BookIO.class.getResource("book-1.0.xsd"));
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         documentBuilderFactory.setNamespaceAware(true);
