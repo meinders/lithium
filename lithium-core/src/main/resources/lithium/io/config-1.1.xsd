@@ -1,0 +1,328 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:opwviewer:config"
+  targetNamespace="urn:opwviewer:config" elementFormDefault="qualified">
+
+  <xsd:element name="config">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element name="displays" type="Displays" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="catalogs" type="Catalogs" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="appearance" type="Appearance" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="recent-files" type="RecentFiles" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="announcements" type="Announcements" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="reminders" type="Reminders" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="utilities" type="Utilities" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="audio-recorder" type="AudioRecorder" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="option" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+        <xsd:element name="load-on-startup" type="xsd:string" minOccurs="0" maxOccurs="1" />
+      </xsd:choice>
+
+      <xsd:attribute name="version" type="Version" use="required">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Specifies the version of this specification that the document conforms to.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:simpleType name="Version">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="\d+(\.\d+)*" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="Displays">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="display" type="Display" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="Display">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="device" type="Device" minOccurs="0" maxOccurs="1" />
+    </xsd:choice>
+
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+  </xsd:complexType>
+
+  <!-- TODO: Replace with simple type. -->
+  <xsd:complexType name="Device">
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+  </xsd:complexType>
+
+  <xsd:complexType name="Catalogs">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="lyrics" type="Catalog" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="books" type="Catalog" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:choice>
+
+    <xsd:attribute name="default-bundle" type="xsd:string" use="optional" />
+  </xsd:complexType>
+
+  <!-- TODO: Replace with simple type. -->
+  <xsd:complexType name="Catalog">
+    <xsd:attribute name="url" type="xsd:anyURI" use="required" />
+  </xsd:complexType>
+
+  <xsd:complexType name="Appearance">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="scrollbar" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:attribute name="visible" type="xsd:boolean" />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="divider" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:attribute name="visible" type="xsd:boolean" />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="auto-scroll" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:attribute name="speed" type="xsd:double" />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="background" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:attribute name="color" type="xsd:string" use="optional" />
+          <xsd:attribute name="image" type="xsd:anyURI" use="optional" />
+          <xsd:attribute name="visibleInPreview" type="xsd:boolean" use="optional" />
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="scroller" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:attribute name="type" use="optional">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="plain" />
+                <xsd:enumeration value="smooth" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+          <xsd:attribute name="units" use="optional">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="characters" />
+                <xsd:enumeration value="lines" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="font" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:attribute name="use" type="xsd:string" use="required" />
+          <xsd:attribute name="family" type="xsd:string" use="required" />
+          <xsd:attribute name="size" type="xsd:positiveInteger" use="optional" />
+          <xsd:attribute name="bold" type="xsd:boolean" use="optional" />
+          <xsd:attribute name="italic" type="xsd:boolean" use="optional" />
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="RecentFiles">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="recent-file" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:attribute name="name" type="xsd:string" use="required" />
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="Announcements">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="preset" type="Preset" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="Preset">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="text" type="xsd:string" minOccurs="1" maxOccurs="1" />
+
+      <xsd:element name="param" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:attribute name="tag" type="xsd:string" use="required" />
+          <xsd:attribute name="type" type="xsd:string" use="required" />
+          <xsd:attribute name="label" type="xsd:string" use="optional" />
+          <xsd:attribute name="format" type="xsd:string" use="optional" />
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:choice>
+
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+  </xsd:complexType>
+
+  <xsd:complexType name="Reminders">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="reminder" type="Reminder" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="Reminder">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="text" type="xsd:string" minOccurs="1" maxOccurs="1" />
+
+       <xsd:choice minOccurs="0" maxOccurs="1">
+         <xsd:element name="daily" type="DailyReminder" minOccurs="1" maxOccurs="1" />
+         <xsd:element name="weekly" type="WeeklyReminder" minOccurs="1" maxOccurs="1" />
+       </xsd:choice>
+     </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="DailyReminder">
+    <xsd:attribute name="time" type="xsd:time" />
+  </xsd:complexType>
+
+  <xsd:complexType name="WeeklyReminder">
+    <xsd:attribute name="time" type="xsd:time" />
+    <xsd:attribute name="sunday" type="xsd:boolean" />
+    <xsd:attribute name="monday" type="xsd:boolean" />
+    <xsd:attribute name="tuesday" type="xsd:boolean" />
+    <xsd:attribute name="wednesday" type="xsd:boolean" />
+    <xsd:attribute name="thursday" type="xsd:boolean" />
+    <xsd:attribute name="friday" type="xsd:boolean" />
+    <xsd:attribute name="saturday" type="xsd:boolean" />
+  </xsd:complexType>
+
+  <xsd:complexType name="Utilities">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="utility" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:attribute name="name" type="xsd:string" use="required" />
+          <xsd:attribute name="location" type="xsd:string" use="required" />
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="AudioRecorder">
+    <xsd:choice minOccurs="2" maxOccurs="unbounded">
+
+      <xsd:element name="record" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:attribute name="mixer" type="xsd:string" use="optional" />
+          <xsd:attribute name="channels" use="optional" default="2">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="1" />
+                <xsd:maxInclusive value="2" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+          <xsd:attribute name="bits-per-sample" use="optional" default="16">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:int">
+                <xsd:enumeration value="8" />
+                <xsd:enumeration value="16" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+          <xsd:attribute name="sample-rate" use="optional" default="44100" />
+          <xsd:attribute name="byte-order" use="optional" default="little-endian">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="little-endian" />
+                <xsd:enumeration value="big-endian" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="normalize" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="maximum-gain" type="xsd:double" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="window-size" type="xsd:double" minOccurs="0" maxOccurs="1" />
+          </xsd:choice>
+
+          <xsd:attribute name="scope" use="optional" default="all">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="all" />
+                <xsd:enumeration value="channel" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="encode" minOccurs="0" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:choice minOccurs="1" maxOccurs="1">
+            <xsd:element name="wave" />
+            <xsd:element name="mp3">
+              <xsd:complexType>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                  <xsd:element name="mode" minOccurs="0" maxOccurs="1">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="stereo" />
+                        <xsd:enumeration value="joint-stereo" />
+                        <xsd:enumeration value="mono" />
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="bit-rate" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                      <xsd:choice minOccurs="1" maxOccurs="1">
+                        <xsd:element name="constant">
+                          <xsd:complexType>
+                            <xsd:attribute name="rate" type="xsd:positiveInteger" use="optional" />
+                          </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element name="average">
+                          <xsd:complexType>
+                            <xsd:attribute name="rate" type="xsd:positiveInteger" use="required" />
+                          </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element name="variable">
+                          <xsd:complexType>
+                            <xsd:attribute name="quality" use="optional">
+                              <xsd:simpleType>
+                                <xsd:restriction base="xsd:int">
+                                  <xsd:minInclusive value="0" />
+                                  <xsd:maxInclusive value="9" />
+                                </xsd:restriction>
+                              </xsd:simpleType>
+                            </xsd:attribute>
+                          </xsd:complexType>
+                        </xsd:element>
+                      </xsd:choice>
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:choice>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:choice>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="store" minOccurs="1" maxOccurs="1">
+        <xsd:complexType>
+          <xsd:choice minOccurs="1" maxOccurs="unbounded">
+            <xsd:element name="folder" type="xsd:string" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="naming-scheme" minOccurs="0" maxOccurs="1">
+              <xsd:complexType>
+                <xsd:choice minOccurs="1" maxOccurs="unbounded">
+                  <xsd:element name="string" type="xsd:string" />
+                  <xsd:element name="date">
+                    <xsd:complexType>
+                      <xsd:attribute name="format" type="xsd:string" use="required" />
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="sequence" minOccurs="0" maxOccurs="1" />
+                </xsd:choice>
+                <xsd:attribute name="separator" type="xsd:string" use="optional" />
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:choice>
+        </xsd:complexType>
+      </xsd:element>
+
+    </xsd:choice>
+  </xsd:complexType>
+</xsd:schema>

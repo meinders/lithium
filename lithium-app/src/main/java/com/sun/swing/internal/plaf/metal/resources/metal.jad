@@ -1,0 +1,86 @@
+// Decompiled by Jad v1.5.8e2. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://kpdus.tripod.com/jad.html
+// Decompiler options: packimports(3) 
+// Source File Name:   metal.java
+
+package com.sun.swing.internal.plaf.metal.resources;
+
+import java.util.ListResourceBundle;
+
+public final class metal extends ListResourceBundle
+{
+
+    public metal()
+    {
+    }
+
+    protected final Object[][] getContents()
+    {
+        return contents;
+    }
+
+    private static final Object contents[][] = {
+        {
+            "FileChooser.detailsViewButtonAccessibleName", "Details"
+        }, {
+            "FileChooser.detailsViewButtonToolTipText", "Details"
+        }, {
+            "FileChooser.fileAttrHeaderText", "Attributes"
+        }, {
+            "FileChooser.fileDateHeaderText", "Modified"
+        }, {
+            "FileChooser.fileNameHeaderText", "Name"
+        }, {
+            "FileChooser.fileNameLabelText", "File Name:"
+        }, {
+            "FileChooser.fileSizeHeaderText", "Size"
+        }, {
+            "FileChooser.fileTypeHeaderText", "Type"
+        }, {
+            "FileChooser.filesOfTypeLabelText", "Files of Type:"
+        }, {
+            "FileChooser.homeFolderAccessibleName", "Home"
+        }, {
+            "FileChooser.homeFolderToolTipText", "Home"
+        }, {
+            "FileChooser.listViewButtonAccessibleName", "List"
+        }, {
+            "FileChooser.listViewButtonToolTipText", "List"
+        }, {
+            "FileChooser.lookInLabelText", "Look In:"
+        }, {
+            "FileChooser.newFolderAccessibleName", "New Folder"
+        }, {
+            "FileChooser.newFolderToolTipText", "Create New Folder"
+        }, {
+            "FileChooser.saveInLabelText", "Save In:"
+        }, {
+            "FileChooser.upFolderAccessibleName", "Up"
+        }, {
+            "FileChooser.upFolderToolTipText", "Up One Level"
+        }, {
+            "InternalFrameTitlePane.closeButtonAccessibleName", "Close"
+        }, {
+            "InternalFrameTitlePane.iconifyButtonAccessibleName", "Iconify"
+        }, {
+            "InternalFrameTitlePane.maximizeButtonAccessibleName", "Maximize"
+        }, {
+            "MetalTitlePane.closeMnemonic", "67"
+        }, {
+            "MetalTitlePane.closeTitle", "Close"
+        }, {
+            "MetalTitlePane.iconifyMnemonic", "69"
+        }, {
+            "MetalTitlePane.iconifyTitle", "Minimize"
+        }, {
+            "MetalTitlePane.maximizeMnemonic", "88"
+        }, {
+            "MetalTitlePane.maximizeTitle", "Maximize"
+        }, {
+            "MetalTitlePane.restoreMnemonic", "82"
+        }, {
+            "MetalTitlePane.restoreTitle", "Restore"
+        }
+    };
+
+}

@@ -1,0 +1,61 @@
+<!-- PUBLIC "-//Frixus//DTD opwViewer Configuration 1.0//EN"
+"config.dtd" -->
+
+<!--
+version:    0.8 (2005.08.04)
+author:     Gerrit Meinders
+-->
+
+<!ELEMENT config (display*, catalogs, default-bundel, scrollbar, divider,
+        recent-files?, auto-scroll?, background?)>
+
+<!ELEMENT display (device?, mode?)>
+<!ATTLIST display           id              CDATA   #REQUIRED>
+
+<!ELEMENT device (EMPTY)>
+<!ATTLIST device            id              CDATA   #REQUIRED>
+
+<!ELEMENT mode (EMPTY)>
+<!ATTLIST mode              width           CDATA   #REQUIRED
+                            height          CDATA   #REQUIRED
+                            bitDepth        CDATA   #REQUIRED
+                            refreshRate     CDATA   #REQUIRED>
+
+<!ELEMENT catalogs (catalog*)>
+
+<!ELEMENT catalog (EMPTY)>
+<!ATTLIST catalog           url             CDATA   #REQUIRED>
+
+<!ELEMENT default-bundel (EMPTY)>
+<!ATTLIST default-bundel    id              CDATA   #REQUIRED>
+
+<!ELEMENT scrollbar (EMPTY)>
+<!ATTLIST scrollbar         visible         (true|false)
+                                                    #REQUIRED>
+
+<!ELEMENT divider (EMPTY)>
+<!ATTLIST divider           visible         (true|false)
+                                                    #REQUIRED>
+<!ELEMENT recent-files (recent-file*)>
+
+<!ELEMENT recent-file (EMPTY)>
+<!ATTLIST recent-file       name            CDATA   #REQUIRED>
+
+<!ELEMENT auto-scroll (EMPTY)>
+<!ATTLIST auto-scroll       speed           CDATA   #IMPLIED
+                            delay           CDATA   #IMPLIED
+                            rate            CDATA   #IMPLIED>
+
+<!ELEMENT scroller   (EMPTY)>
+<!ATTLIST scroller          type            (plain|smooth)
+                                                    "smooth"
+                            units           (characters|lines)
+                                                    "lines">
+
+<!ELEMENT background (EMPTY)>
+<!ATTLIST background        color           CDATA   #IMPLIED
+                            image           CDATA   #IMPLIED
+                            visibleInPreview
+                                            (true|false)
+                                                    "false">
+

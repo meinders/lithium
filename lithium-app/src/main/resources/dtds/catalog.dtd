@@ -1,0 +1,42 @@
+<!-- PUBLIC "-//Frixus//DTD opwViewer Catalog 1.0//EN" "catalog.dtd" -->
+
+<!--
+Date:   2006.02.15
+Author: Gerrit Meinders
+-->
+
+<!ELEMENT catalog (bundle | category | cd)*>
+
+<!ELEMENT bundle (lyric)*>
+<!ATTLIST bundle    name    CDATA   #REQUIRED
+                    version CDATA   #REQUIRED>
+
+<!ELEMENT lyric (text, originalTitle?, copyrights?, key*)>
+<!ATTLIST lyric     number  CDATA   #REQUIRED
+                    title   CDATA   #REQUIRED>
+
+<!ELEMENT text (#PCDATA)>
+
+<!ELEMENT originalTitle (#PCDATA)>
+
+<!ELEMENT copyrights (#PCDATA)>
+
+<!ELEMENT bible-ref EMPTY>
+<!ATTLIST bible-ref book            CDATA   #REQUIRED
+                    chapter         CDATA   #REQUIRED
+                    verse           CDATA   #IMPLIED
+                    endVerse        CDATA   #IMPLIED>
+
+<!ELEMENT key EMPTY>
+<!ATTLIST key       name    CDATA   #REQUIRED>
+
+<!ELEMENT category (lyric-ref)*>
+<!ATTLIST category  name    CDATA   #REQUIRED>
+
+<!ELEMENT cd (lyric-ref)*>
+<!ATTLIST cd        name    CDATA   #REQUIRED>
+
+<!ELEMENT lyric-ref EMPTY>
+<!ATTLIST lyric-ref bundle  CDATA   #REQUIRED
+                    number  CDATA   #REQUIRED>
+

@@ -1,0 +1,57 @@
+Later on...
+ - Support auto-correction of lyrics, maybe?
+ - Drag-and-drop
+ - Reminders
+
+Planned changes in version 1.2
+ - Support meta-data in lyrics, such as the "[splits]" annotations found in
+   the new OPS 2009 format.
+ - Printing support:
+    * entire playlist;
+    * each lyric on a playlist seperately in a large font.
+ - Easier access to 'My Lithium files' folder.
+ - Added a search dialog to quickly browse the results found by using a search bar.
+   (?) This new dialog replaces the previous search dialog.
+ - Allow multiple selection in various file choosers.
+ - Improved import from OPS 2009 format.
+ - Playlist improvements:
+    * External media (presentations, videos) can now be added to a playlist.
+    * Contents of book/Bible references can now be viewed by double-clicking on the
+      playlist, same as lyrics.
+    * Added support for saving playlists containing book/Bible references.
+
+============================
+
+Changes in version 1.1
+
+Planned changes in version 1.1
+ - Lyric version management:
+    * 
+
+============================
+
+Changes in version 1.0 release 3
+ - Fixed: Text is positioned incorrectly, such that lines with lower-than-normal
+   ascent are positioned above the baseline.
+ - References within the text of a lyric can now be disabled (if really needed)
+   by setting the 'disableReferenceExpansion' option in your 'config.xml'.
+ - Export lyric catalogs as multiple web pages: one page for each lyric,
+   a table of contents for each bundle and a table of contents for the catalog.
+ - New playlist file format; fixed whitespace handling.
+ - Added settings for vertical margins. The resulting empty space at the top
+   and/or bottom of the screen can be useful is part of the (projection) screen
+   is occluded.
+
+Changes in version 1.0 release 2
+ - Fixed: Settings dialog breaks when settings are applied.
+ - Prevent renaming of files in file choosers.
+ - File choosers now default to the appropriate folders for lyrics and books.
+   In other cases, the last folder shown in a previous file chooser is used as
+   a default.
+ - Updated about dialog image and layout.
+ - Fixed: Search results don't show.
+ - References within the text of a lyric, typically "(Chorus)", are now
+   automatically expanded to the referenced content.
+ - Fixed: Lyrics imported from OPS 2009 sometimes contain format-specific
+   annotations, e.g. "[split]". These are now removed.
+ - Fixed: In certain unusual situations, the view crashes while fading in or out.

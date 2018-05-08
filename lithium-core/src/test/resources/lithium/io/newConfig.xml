@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><config version="1.0" xmlns="urn:opwviewer:config">
+  <displays acceleration="opengl">
+    <display id="editor">
+      <device id="\Display0"/>
+    </display>
+    <display id="presentation"/>
+  </displays>
+  <catalogs default-bundle="Opwekking">
+    <lyrics url="newcatalog.xml"/>
+    <lyrics url="opwekking.xml"/>
+    <lyrics url="spoorzicht.xml"/>
+  </catalogs>
+  <appearance>
+    <scrollbar visible="true"/>
+    <divider visible="true"/>
+    <auto-scroll speed="0.4"/>
+    <background color="#0040c0" image="images/backgrounds/Blue%20Waves.png" visibleInPreview="false"/>
+    <scroller type="smooth" units="lines"/>
+    <font bold="false" family="SansSerif" italic="false" size="40" use="DEFAULT"/>
+    <font bold="true" family="SansSerif" italic="true" size="40" use="TITLE"/>
+    <font bold="false" family="SansSerif" italic="false" size="24" use="REFERENCE"/>
+    <font bold="false" family="SansSerif" italic="false" size="14" use="COPYRIGHTS"/>
+    <margin bottom="0.05" left="0.05" right="0.04999999999999993" top="0.04999999999999993"/>
+  </appearance>
+  <recent-files>
+    <recent-file name="D:\Code\Java\Projects\opwViewer\dist\newcatalog.xml"/>
+  </recent-files>
+  <announcements>
+    <preset name="Algemene informatie">
+      <text>{0}
+zangdienst door {1}
+overdenking door {2}</text>
+      <param format="EEEE d MMMM yyyy" tag="{0}" type="date" value="zaterdag 11 maart 2006"/>
+      <param label="Zangdienst" tag="{1}" type="text"/>
+      <param label="Overdenking" tag="{2}" type="text"/>
+    </preset>
+    <preset name="Autolichten">
+      <text>Een auto met kenteken {0} heeft de lichten nog aan.
+Geeft niks: die gaan vanzelf uit.</text>
+      <param label="Kenteken" tag="{0}" type="text"/>
+    </preset>
+  </announcements>
+  <utilities>
+    <utility location="C:\Program Files\Microsoft Office\PowerPoint Viewer\PPTVIEW.EXE" name="ppt"/>
+  </utilities>
+  <audio-recorder>
+    <record bits-per-sample="16" byte-order="little-endian" channels="2" sample-rate="44100"/>
+    <store>
+      <folder>.</folder>
+      <naming-scheme separator="-">
+        <string>recording</string>
+        <date format="yyyyMMdd"/>
+        <sequence/>
+      </naming-scheme>
+    </store>
+  </audio-recorder>
+</config>

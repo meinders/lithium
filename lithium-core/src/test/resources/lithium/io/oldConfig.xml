@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE config PUBLIC "-//Frixus//DTD opwViewer Configuration 1.0//EN" "config.dtd">
+<config>
+  <display id="editor">
+    <device id="\Display0"/>
+  </display>
+  <display id="presentation"/>
+  <catalogs>
+    <catalog url="newcatalog.xml"/>
+    <catalog url="opwekking.xml"/>
+    <catalog url="spoorzicht.xml"/>
+  </catalogs>
+  <default-bundle id="Opwekking"/>
+  <scrollbar visible="true"/>
+  <divider visible="true"/>
+  <recent-files>
+    <recent-file name="D:\Code\Java\Projects\opwViewer\dist\newcatalog.xml"/>
+  </recent-files>
+  <auto-scroll speed="0.4"/>
+  <background color="#0040c0" image="images/backgrounds/Blue%20Waves.png" visibleInPreview="false"/>
+  <scroller type="smooth" units="lines"/>
+  <utilities>
+    <utility location="C:\Program Files\Microsoft Office\PowerPoint Viewer\PPTVIEW.EXE" name="ppt"/>
+  </utilities>
+</config>

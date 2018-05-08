@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE playlist PUBLIC "-//Frixus//DTD opwViewer Playlist 1.0//EN" "playlist.dtd">
+<playlist>
+  <lyric-ref bundle="bundle1" number="123"/>
+  <lyric-ref bundle="bundle2" number="234"/>
+  <text>
+Lorem ipsum dolor sit amet,
+consectetur adipiscing elit.
+Proin hendrerit orci
+sed sapien eleifend aliquam.
+Etiam at dolor ac metus
+consectetur porta in eu nisl.
+  </text>
+</playlist>

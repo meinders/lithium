@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<playlist version="1.1" xmlns="urn:lithium:playlist">
+    
+  <lyric bundle="bundle1" number="123" />
+  <lyric bundle="bundle2" number="234" />
+
+  <text>Lorem ipsum dolor sit amet,
+consectetur adipiscing elit.
+Proin hendrerit orci
+sed sapien eleifend aliquam.
+Etiam at dolor ac metus
+consectetur porta in eu nisl.</text>
+
+  <!-- Book references by ISBN. -->
+
+  <!-- "Mastering Joomla! 1.5" by James Kennard -->
+  <book ref="urn:isbn:978-1-847192-82-0" />
+
+  <!-- Page 144 from "Mastering Joomla! 1.5" by James Kennard -->
+  <book ref="urn:isbn:978-1-847192-82-0">
+    <location page="144" />
+  </book>
+
+  <!-- Various biblical references, ranging from simple to more complex: -->
+
+  <!-- Genesis -->
+  <book ref="urn:lithium:book:/bible/genesis" />
+
+  <!-- Psalm 139 -->
+  <book ref="urn:lithium:book:/bible/psalms">
+    <location chapter="139" />
+  </book>
+
+  <!-- John chapter 3, verse 16 -->
+  <book ref="urn:lithium:book:/bible/john">
+    <location chapter="3" verse="16" />
+  </book>
+
+  <!-- 2 Samuel, chapter 22, verses 31-34, from any Dutch translation -->
+  <book ref="urn:lithium:book:/bible/ephesians" lang="nl">
+    <!-- An enclosing range-tag is optional. -->
+    <start chapter="2" verse="19" />
+    <end chapter="2" verse="20" />
+  </book>
+
+  <!-- John chapter 3, verse 16 -->
+  <book ref="urn:lithium:book:/bible/john">
+    <location chapter="3" verse="16" />
+  </book>
+
+  <!-- Ephesians chapter 2, verses 19-20 and 22, from Dutch NBG51 -->
+  <book ref="urn:lithium:book:/bible/ephesians" lang="nl" translation="nbg51">
+    <range>
+      <start chapter="2" verse="19" />
+      <end chapter="2" verse="20" />
+    </range>
+    <range>
+      <!-- Omitting the enclosing range-tag is illegal! -->
+      <location chapter="2" verse="22" />
+    </range>
+  </book>
+
+  <image src="playlist-1.1.png" />
+
+  <external src="playlist-1.1.ppt" type="application/vnd.ms-powerpoint" />
+  <external src="playlist-1.1.odp" type="application/vnd.oasis.opendocument.presentation" />
+
+</playlist>

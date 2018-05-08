@@ -1,0 +1,22 @@
+<!-- PUBLIC "-//Frixus//DTD opwViewer Override//EN"
+"override.dtd" -->
+
+<!--
+date:   2004.02.02
+author: Gerrit Meinders
+-->
+
+<!ELEMENT override (startup?, item*)>
+<!ATTLIST override  type    (temporary |
+                            permanent)      "temporary">
+
+<!ELEMENT startup (EMPTY)>
+<!ATTLIST startup   mode    (editor |
+                            presentation)   "editor">
+
+<!ELEMENT item (EMPTY)>
+<!ATTLIST item      type    (catalog|
+							playlist|
+							config)			#REQUIRED
+                    url     CDATA           #REQUIRED>
+

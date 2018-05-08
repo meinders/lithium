@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema
+    targetNamespace="urn:lithium:playlist"
+    elementFormDefault="qualified"
+    xmlns="urn:lithium:playlist"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <xsd:annotation>
+    <xsd:documentation xml:lang="en">
+      <xhtml:p>
+        This schema defines version 1.1 of
+        <xhtml:a href="https://github.com/meinders/lithium">Lithium</xhtml:a>'s
+        file format for playlists.
+      </xhtml:p>
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <xsd:element name="playlist">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element name="lyric" type="Lyric" minOccurs="0" maxOccurs="unbounded" />
+        <xsd:element name="text" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+        <xsd:element name="book" type="Book" minOccurs="0" maxOccurs="unbounded" />
+        <xsd:element name="image" type="Image" minOccurs="0" maxOccurs="unbounded" />
+        <xsd:element name="external" type="External" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:choice>
+
+      <xsd:attribute name="version" type="Version" use="required" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:simpleType name="Version">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+          <xhtml:p>
+            Specifies the version of this specification that the document
+            conforms to. Format version numbers are derived from the Lithium
+            release version in which the format was introduced or modified.
+          </xhtml:p>
+        </xsd:documentation>
+      </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="\d+(\.\d+)*" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="Lyric">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        <xhtml:p>
+          A reference to a lyric that can be resolved using a catalog.
+        </xhtml:p>
+
+        <xhtml:p>
+          See also: <xhtml:a href="catalog-1.0.xsd">Catalog schema 1.0</xhtml:a>.
+        </xhtml:p>
+      </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:attribute name="bundle" type="xsd:string" use="required" />
+    <xsd:attribute name="number" type="xsd:positiveInteger" use="required" />
+  </xsd:complexType>
+
+  <xsd:complexType name="Book">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        <xhtml:p>
+          A reference to a book or a specific part of it.
+        </xhtml:p>
+      </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:choice minOccurs="0">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+          <xhtml:p>
+            Specifies which part of the book is referenced. Multiple ranges may
+            be specified, enclosed in &lt;range&gt; tags. For a single range,
+            the &lt;range&gt; tag is optional.
+          </xhtml:p>
+
+          <xhtml:p>
+            Ranges should not overlap, but overlapping ranges are not illegal.
+            Any overlapping ranges are merged (union). For example, the two
+            ranges "pages 3-5" and "pages 4-9" must be interpreted as
+            "pages 3-9". The same goes for biblical references, with the notable
+            addition that, for example, "chapter 3, verse 10-20" and "chapter 3"
+            (as a whole) results in "chapter 3" (again, the entire chapter).
+          </xhtml:p>
+        </xsd:documentation>
+      </xsd:annotation>
+
+      <xsd:group ref="SimpleBookRange" maxOccurs="1" />
+      <xsd:element name="range" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:group ref="SimpleBookRange" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:choice>
+
+    <xsd:attribute name="ref" type="xsd:anyURI" use="required">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+          <xhtml:p>
+            Identifies the book, preferably using a URN. For example, using
+            the ISBN scheme:
+          </xhtml:p>
+          <xhtml:blockquote>
+            urn:isbn:978-3-16-148410-0
+          </xhtml:blockquote>
+
+          <xhtml:p>
+            For biblical references, a different URN scheme is used, to seperate
+            the reference from any specific Bible version or translation.
+            In the absence of an existing URN-based standard for this (at least
+            to my knowledge), a Lithium-specific Bible URN scheme is defined.
+            This URN scheme uses the following syntax (BNF):
+          </xhtml:p>
+
+          <xhtml:blockquote>
+            "urn:lithium:bible:/" &lt;book-name&gt;
+          </xhtml:blockquote>
+
+          <xhtml:p>
+            The 'book-name' is the name of the book, written in lower case,
+            using the spellings of the New American Bible (NAB). Any spaces are
+            replaced by dashes ('-'). For example:
+          </xhtml:p>
+
+          <xhtml:ul>
+            <xhtml:li>urn:lithium:bible:/genesis</xhtml:li>
+            <xhtml:li>urn:lithium:bible:/1-samuel</xhtml:li>
+            <xhtml:li>urn:lithium:bible:/song-of-solomon</xhtml:li>
+            <xhtml:li>urn:lithium:bible:/ephesians</xhtml:li>
+          </xhtml:ul>
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+
+    <xsd:attribute name="lang" type="xsd:language" use="optional">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+          <xhtml:p>
+            The language of the book.
+          </xhtml:p>
+          <xhtml:p>
+            In the case of a biblical reference, a translation in this language
+            is preferred.
+          </xhtml:p>
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+
+    <xsd:attribute name="translation" type="xsd:string" use="optional">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+          <xhtml:p>
+            Used for biblical references to indicate which specific translation
+            is preferred.
+          </xhtml:p>
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+  <xsd:group name="SimpleBookRange">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        <xhtml:p>
+          Refers to part of the book, using either one or two pointers.
+        </xhtml:p>
+      </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:choice>
+      <xsd:sequence>
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <xhtml:p>
+              Refers to part of the book by specifying a start and end pointer.
+            </xhtml:p>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:element name="start" type="BookPointer" />
+        <xsd:element name="end" type="BookPointer" />
+      </xsd:sequence>
+      <xsd:element name="location" type="BookPointer">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            <xhtml:p>
+              Refers to part of the book by specifying a single pointer.
+            </xhtml:p>
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:choice>
+  </xsd:group>
+
+  <xsd:complexType name="BookPointer">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        <xhtml:p>
+          Points to a specific location in a book.
+        </xhtml:p>
+      </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:attribute name="page" type="xsd:string" use="optional">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+          <xhtml:p>
+            Identifies the page. This attribute is defined as a string to allow
+            for non-numeric page numbers, such as "iii" and "2-16".
+          </xhtml:p>
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+
+    <xsd:attribute name="chapter" type="xsd:positiveInteger" use="optional">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+          <xhtml:p>
+            The number of a chapter, for biblical references.
+          </xhtml:p>
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+
+    <xsd:attribute name="verse" type="xsd:positiveInteger" use="optional">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+          <xhtml:p>
+            The number of a verse, for biblical references.
+          </xhtml:p>
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+  <xsd:complexType name="Image">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        <xhtml:p>
+          A reference to an image.
+        </xhtml:p>
+      </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:attribute name="src" type="xsd:anyURI" use="optional">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+          <xhtml:p>
+            The location of the image. Relative URIs are resolved against the
+            URI of the playlist.
+          </xhtml:p>
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+  <xsd:complexType name="External">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        <xhtml:p>
+          A reference to a document to be viewed with some external application.
+          For example a presentation or video.
+        </xhtml:p>
+      </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:attribute name="src" type="xsd:anyURI" use="optional">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+          <xhtml:p>
+            The location of the document to be viewed. Relative URIs are
+            resolved against the URI of the playlist.
+          </xhtml:p>
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+
+    <xsd:attribute name="type" type="xsd:string" use="optional">
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+          <xhtml:p>
+            The content type of the document referenced by the <samp>src</samp>
+            attribute. This must be a MIME Media Type, as defined
+            <xhtml:a href="http://tools.ietf.org/html/rfc2046">RFC 2046</xhtml:a>
+            and registered by
+            <xhtml:a href="http://www.iana.org/assignments/media-types/">IANA</xhtml:a>.
+          </xhtml:p>
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+</xsd:schema>

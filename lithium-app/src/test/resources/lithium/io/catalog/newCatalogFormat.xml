@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><catalog version="0.9" xmlns="urn:opwviewer:catalog">
+  <group type="bundles">
+    <group name="bundle 1" version="today">
+      <lyric number="1" title="lyric 1">
+        <text>text 1, line 1
+text 1, line 2
+text 1, line 3
+        </text>
+      </lyric>
+      <lyric number="2" title="lyric 2">
+        <text>text 2, line 1
+text 2, line 2
+        </text>
+        <originalTitle>original lyric 2
+        </originalTitle>
+          <copyrights>© copyrights 2, line 1
+copyrights 2, line 2
+        </copyrights>
+        <key name="Dmin"/>
+        <key name="Es"/>
+        <bible-ref book="18" chapter="136" verse="1"/>
+      </lyric>
+    </group>
+    <group name="bundle 2" version="yesterday">
+      <lyric number="1" title="lyric 3">
+        <text>text 3, line 1
+text 3, line 2
+text 3, line 3
+        </text>
+      </lyric>
+    </group>
+    <group name="bundle 3" version="tomorrow"/>
+  </group>
+  <group type="categories">
+    <group name="category 1">
+      <lyric number="1" ref="bundle 1"/>
+      <lyric number="2" ref="bundle 1"/>
+    </group>
+    <group name="category 2">
+      <lyric number="1" ref="bundle 1"/>
+      <lyric number="1" ref="bundle 2"/>
+    </group>
+    <group name="category 3"/>
+  </group>
+  <group type="cds">
+    <group name="cd 1">
+      <lyric number="1" ref="bundle 1"/>
+      <lyric number="2" ref="bundle 1"/>
+      <lyric number="1" ref="bundle 2"/>
+    </group>
+    <group name="cd 2"/>
+  </group>
+</catalog>

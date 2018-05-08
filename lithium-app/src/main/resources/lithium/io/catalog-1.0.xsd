@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="urn:opwviewer:catalog"
+    targetNamespace="urn:opwviewer:catalog"
+    elementFormDefault="qualified">
+
+  <xsd:element name="catalog">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element name="group" type="Group" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:choice>
+
+      <xsd:attribute name="version" type="Version" use="required">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Specifies the version of this specification that the document
+            conforms to.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:simpleType name="Version">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="\d+(\.\d+)*" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:complexType name="Group">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="group" type="Group" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="lyric" type="Lyric" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:choice>
+
+    <xsd:attribute name="name"    type="xsd:string" use="optional" />
+    <xsd:attribute name="version" type="xsd:string" use="optional" />
+    <xsd:attribute name="type"    type="GroupType"  use="optional" />
+  </xsd:complexType>
+
+  <xsd:simpleType name="GroupType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="bundles"    />
+      <xsd:enumeration value="categories" />
+      <xsd:enumeration value="cds"        />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="Lyric">
+    <xsd:choice minOccurs="1" maxOccurs="unbounded">
+      <xsd:element name="text"          type="xsd:string"     minOccurs="1" maxOccurs="1" />
+      <xsd:element name="originalTitle" type="xsd:string"     minOccurs="0" maxOccurs="1" />
+      <xsd:element name="copyrights"    type="xsd:string"     minOccurs="0" maxOccurs="1" />
+      <xsd:element name="bibleRef"      type="BibleReference" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="key"           type="xsd:string"     minOccurs="0" maxOccurs="unbounded" />
+    </xsd:choice>
+    
+    <xsd:attribute name="number"    type="xsd:positiveInteger" use="required" />
+    <xsd:attribute name="title"     type="xsd:string"          use="optional" />
+
+    <xsd:attribute name="ref"       type="xsd:string"          use="optional" />
+    <xsd:attribute name="refNumber" type="xsd:positiveInteger" use="optional" />
+  </xsd:complexType>
+
+  <xsd:complexType name="BibleReference">
+    <xsd:attribute name="book"       type="xsd:anyURI"          use="required" />
+    <xsd:attribute name="chapter"    type="xsd:positiveInteger" use="optional" />
+    <xsd:attribute name="endChapter" type="xsd:positiveInteger" use="optional" />
+    <xsd:attribute name="verse"      type="xsd:positiveInteger" use="optional" />
+    <xsd:attribute name="endVerse"   type="xsd:positiveInteger" use="optional" />
+  </xsd:complexType>
+
+  <xsd:element name="catalog-patch">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        &lt;catalog-patch&gt; is the root element for patches, i.e. documents
+        that describe a series of changes to be made to an existing catalog.
+      </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element name="lyric" type="LyricPatch" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:choice>
+
+      <xsd:attribute name="version" type="Version" />
+      <xsd:attribute name="inputVersion"  type="xsd:string" use="optional">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Only elements that have their version attribute set to the specified
+            string will be modified.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+      <xsd:attribute name="outputVersion" type="xsd:string" use="optional">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">
+            Elements that are modified will have their version attribute set to
+            the specified version.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:complexType name="LyricPatch">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="replace" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="Replacement">
+              <xsd:attribute name="target" type="LyricProperty" use="optional" default="text" />
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="swap" type="LyricSwap" minOccurs="0" maxOccurs="1" />
+    </xsd:choice>
+
+    <xsd:attribute name="number" use="required" />
+    <xsd:attribute name="ref"    use="required" />
+  </xsd:complexType>
+
+  <xsd:simpleType name="LyricProperty">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="text" />
+      <xsd:enumeration value="title" />
+      <xsd:enumeration value="originalTitle" />
+      <xsd:enumeration value="copyrights" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="LyricSwap">
+    <xsd:attribute name="number" use="required" />
+    <xsd:attribute name="ref"    use="required" />
+  </xsd:complexType>
+
+  <xsd:complexType name="Replacement">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:choice minOccurs="0" maxOccurs="1">
+        <xsd:element name="lines">
+          <xsd:complexType>
+            <xsd:attribute name="from" type="xsd:positiveInteger" />
+            <xsd:attribute name="to"   type="xsd:positiveInteger" />
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="chars">
+          <xsd:complexType>
+            <xsd:attribute name="from" type="xsd:positiveInteger" />
+            <xsd:attribute name="to"   type="xsd:positiveInteger" />
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+  
+      <xsd:choice minOccurs="0" maxOccurs="1">
+        <xsd:element name="replacement" type="xsd:string" />
+      </xsd:choice>
+    </xsd:choice>
+
+    <xsd:attribute name="text" type="xsd:string"          use="optional" />
+    <xsd:attribute name="line" type="xsd:positiveInteger" use="optional" />
+    <xsd:attribute name="char" type="xsd:positiveInteger" use="optional" />
+
+    <xsd:attribute name="replacement" type="xsd:string" use="optional" />
+
+    <xsd:attribute name="regex" type="xsd:boolean" use="optional" default="false" />
+  </xsd:complexType>
+</xsd:schema>

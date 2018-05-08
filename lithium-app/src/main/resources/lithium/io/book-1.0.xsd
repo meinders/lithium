@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="urn:opwviewer:book"
+    targetNamespace="urn:opwviewer:book"
+    elementFormDefault="qualified">
+
+  <xsd:element name="library">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="book" minOccurs="0" maxOccurs="unbounded" />
+      </xsd:choice>
+
+      <xsd:attribute name="lang"    type="xsd:language" use="optional" />
+      <xsd:attribute name="name"    type="xsd:string"   use="required" />
+      <xsd:attribute name="ref"     type="xsd:anyURI"   use="optional" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="book">
+    <xsd:complexType>
+      <xsd:choice>
+        <xsd:element name="content" type="xsd:string" />
+        <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+          <xsd:element ref="chapter" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:choice>
+
+      <xsd:attribute name="lang"    type="xsd:language" use="optional" />
+      <xsd:attribute name="title"   type="xsd:string"   use="required" />
+      <xsd:attribute name="ref"     type="xsd:anyURI"   use="optional" />
+      <xsd:attribute name="src"     type="xsd:anyURI"   use="optional" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="chapter">
+    <xsd:complexType>
+      <xsd:choice>
+        <xsd:element name="content" type="xsd:string" />
+        <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+          <xsd:element name="verse" type="Verse" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:choice>
+
+      <xsd:attribute name="title"   type="xsd:string" use="required" />
+      <xsd:attribute name="src"     type="xsd:anyURI" use="optional" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:complexType name="Verse" mixed="true">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="note"      type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="implied"   type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="literal"   type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="smallCaps" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="role"      type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="pericope"  type="Pericope"   minOccurs="0" maxOccurs="unbounded" />
+    </xsd:choice>
+  
+    <xsd:attribute name="start"       type="xsd:positiveInteger" use="required" />
+    <xsd:attribute name="startSuffix" type="xsd:string"          use="optional" />
+    <xsd:attribute name="end"         type="xsd:positiveInteger" use="optional" />
+    <xsd:attribute name="endSuffix"   type="xsd:string"          use="optional" />
+    <xsd:attribute name="disputed"    type="xsd:boolean"         use="optional" default="false" />
+  </xsd:complexType>
+
+  <xsd:complexType name="Pericope">
+    <xsd:attribute name="title" type="xsd:string" use="optional" />
+  </xsd:complexType>
+</xsd:schema>

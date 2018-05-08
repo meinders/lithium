@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE catalog PUBLIC "-//Frixus//DTD opwViewer Catalog 1.0//EN" "catalog.dtd">
+<catalog>
+  <bundle name="bundle 1" version="today">
+    <lyric number="1" title="lyric 1">
+      <text>text 1, line 1
+text 1, line 2
+text 1, line 3
+      </text>
+    </lyric>
+    <lyric number="2" title="lyric 2">
+      <text>text 2, line 1
+text 2, line 2
+      </text>
+      <originalTitle>original lyric 2
+      </originalTitle>
+      <copyrights>© copyrights 2, line 1
+copyrights 2, line 2
+      </copyrights>
+      <key name="Dmin"/>
+      <key name="Es"/>
+      <bible-ref book="18" chapter="136" verse="1"/>
+    </lyric>
+  </bundle>
+  <bundle name="bundle 2" version="yesterday">
+    <lyric number="1" title="lyric 3">
+      <text>text 3, line 1
+text 3, line 2
+text 3, line 3
+      </text>
+    </lyric>
+  </bundle>
+  <bundle name="bundle 3" version="tomorrow"/>
+  <category name="category 1">
+    <lyric-ref bundle="bundle 1" number="1"/>
+    <lyric-ref bundle="bundle 1" number="2"/>
+  </category>
+  <category name="category 2">
+    <lyric-ref bundle="bundle 1" number="1"/>
+    <lyric-ref bundle="bundle 2" number="1"/>
+  </category>
+  <category name="category 3"/>
+  <cd name="cd 1">
+    <lyric-ref bundle="bundle 1" number="1"/>
+    <lyric-ref bundle="bundle 1" number="2"/>
+    <lyric-ref bundle="bundle 2" number="1"/>
+  </cd>
+  <cd name="cd 2"/>
+</catalog>

@@ -1,0 +1,15 @@
+<!-- PUBLIC "-//Frixus//DTD opwViewer Playlist//EN"
+"playlist.dtd" -->
+
+<!--
+date:   2004.07.12
+author: Gerrit Meinders
+-->
+
+<!ELEMENT playlist (lyric-ref|text)*>
+
+<!ELEMENT lyric-ref (EMPTY)>
+<!ATTLIST lyric-ref	bundle	CDATA	#REQUIRED
+					number	CDATA	#REQUIRED>
+
+<!ELEMENT text (#PCDATA)>
