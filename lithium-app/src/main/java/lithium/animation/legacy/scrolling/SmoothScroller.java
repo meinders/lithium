@@ -158,7 +158,7 @@ public class SmoothScroller implements Scroller {
                     });
 
                     // allow other threads to run
-                    yield();
+                    Thread.yield();
 
                     // sleep 1ms anyway, cuz it seems to fix problems
                     sleep(1);

@@ -182,7 +182,7 @@ public class AutoScroller extends Thread {
                     SwingUtilities.invokeAndWait(scrollCommand);
 
                     // allow other threads to run
-                    yield();
+                    Thread.yield();
                     sleep(1); // 1 ms extra seems to smoothen things a lot
 
                 } catch (InterruptedException e) {
